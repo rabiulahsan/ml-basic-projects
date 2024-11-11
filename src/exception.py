@@ -14,7 +14,7 @@ class CustomException(Exception):
         super().__init__(error_message)
         # Capture the formatted traceback as the error message
         self.error_message = f"{error_message}\n{error_message_details()}"
-        logger.logging.error(self.error_message)  # Log the error details
+        logging.error(self.error_message)  # Log the error details
     
     def __str__(self):
         return self.error_message
