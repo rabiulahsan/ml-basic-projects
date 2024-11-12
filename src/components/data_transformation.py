@@ -4,13 +4,15 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from dataclasses import dataclass
 
 from src.exception import CustomException
 from src.logger import logging
+from src.utils import save_object
 
 @dataclass
 class DataTransformationConfig:
-    preprocessor_file_path = 'artifacts\preprocessor.pkl'
+    preprocessor_file_path = 'artifacts/preprocessor.pkl'
 
 class TransformationPipeline:
     def __init__(self):
@@ -48,7 +50,7 @@ class TransformationPipeline:
             preprocessor = ColumnTransformer(
                 [
                     #? ("pipeline_name", pipeline, colums which it will be applied)
-                    ("num_pipeline", num_pipeline, numerical_columns)
+                    ("num_pipeline", num_pipeline, numerical_columns),
                     ("category_pipeline", category_pipeline, categorical_columns)
                 ]
             )
@@ -77,23 +79,22 @@ class TransformationPipeline:
                 f"Applying preprocessing object on training dataframe and testing dataframe."
             )
 
-            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
-            input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
+            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_data)
+            input_feature_test_arr=preprocessing_obj.transform(input_feature_test_data)
 
             train_arr = np.c_[
-                input_feature_train_arr, np.array(target_feature_train_df)
+                input_feature_train_arr, np.array(target_feature_train_data)
             ]
-            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_df)]
+            test_arr = np.c_[input_feature_test_arr, np.array(target_feature_test_data)]
 
             logging.info(f"Saved preprocessing object.")
 
             save_object(
-
                 file_path=self.data_transformation_config.preprocessor_file_path,
                 obj=preprocessing_obj
-
             )
 
+            logging.info("saving the model has completed.")
             return (
                 train_arr,
                 test_arr,
@@ -102,13 +103,3 @@ class TransformationPipeline:
 
         except Exception as e:
             raise CustomException(e)
-        
-
-        
-
-
-
-    
-
-
-

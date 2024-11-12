@@ -1,5 +1,8 @@
 import os
 import sys
+import dill
+import pickle
+
 import numpy as np 
 import pandas as pd 
 
@@ -15,5 +18,5 @@ def save_object(file_path, obj):
             pickle.dump(obj, file_obj)
 
     except Exception as e:
-        raise CustomException(e, sys)
+        raise CustomException(e)
 
