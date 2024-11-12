@@ -24,4 +24,4 @@ if __name__ == '__main__':
         result = 10 / 0  # Division by zero to trigger an exception
     except Exception as e:
         logging.info("Divided by zero.")
-        raise CustomException("An error occurred in the application")
+        raise CustomException(e)

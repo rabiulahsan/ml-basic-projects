@@ -1,5 +1,3 @@
-# src/logger.py
-
 import logging
 import os
 from datetime import datetime
@@ -19,6 +17,6 @@ logging.basicConfig(
     level=logging.INFO,
 )
 
-
-if __name__ == "__main__":
-    logging.info("Starting the application...") 
+#example
+# if __name__ == "__main__":
+#     logging.info("Starting the application...") 
