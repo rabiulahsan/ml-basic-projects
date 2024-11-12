@@ -14,7 +14,7 @@ from src.utils import save_object
 class DataTransformationConfig:
     preprocessor_file_path = 'artifacts/preprocessor.pkl'
 
-class TransformationPipeline:
+class DataTransformation:
     def __init__(self):
         self.data_transformation_config = DataTransformationConfig()
 
@@ -59,7 +59,7 @@ class TransformationPipeline:
         except Exception as e:
             raise CustomException(e)
 
-    def DataTransformation(self, train_path, test_path):
+    def initiate_data_transformation(self, train_path, test_path):
         try:
             train_data = pd.read_csv(train_path)
             test_data = pd.read_csv(test_path)
