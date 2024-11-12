@@ -61,14 +61,17 @@ class DataTransformation:
 
     def initiate_data_transformation(self, train_path, test_path):
         try:
+            #? read the data from path
             train_data = pd.read_csv(train_path)
             test_data = pd.read_csv(test_path)
 
+            #? pipeline for column transforming 
             preprocessing_obj = self.DataTransformerPipeline()
 
             target_column_name="math_score"
             numerical_columns = ["writing_score", "reading_score"]
 
+            #? The code specifies math_score as the target (dependent variable), which is what the model will predict.
             input_feature_train_data=train_data.drop(columns=[target_column_name],axis=1)
             target_feature_train_data=train_data[target_column_name]
 
@@ -79,9 +82,14 @@ class DataTransformation:
                 f"Applying preprocessing object on training dataframe and testing dataframe."
             )
 
+            #? fit_transform the both train and test data according to the pipeline
+            #? fit_transform is used for training data
+            #?transform is used on test data
             input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_data)
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_data)
 
+
+            #?
             train_arr = np.c_[
                 input_feature_train_arr, np.array(target_feature_train_data)
             ]
@@ -89,6 +97,7 @@ class DataTransformation:
 
             logging.info(f"Saved preprocessing object.")
 
+            #? for saving the file. it imports from the utility 
             save_object(
                 file_path=self.data_transformation_config.preprocessor_file_path,
                 obj=preprocessing_obj
