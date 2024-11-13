@@ -69,7 +69,7 @@ class DataTransformation:
             preprocessing_obj = self.DataTransformerPipeline()
 
             target_column_name="math_score"
-            numerical_columns = ["writing_score", "reading_score"]
+            # numerical_columns = ["writing_score", "reading_score"]
 
             #? The code specifies math_score as the target (dependent variable), which is what the model will predict.
             input_feature_train_data=train_data.drop(columns=[target_column_name],axis=1)

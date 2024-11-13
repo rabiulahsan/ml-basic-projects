@@ -23,7 +23,7 @@ class ModelTrainer:
         self.model_trainer_config = ModelTrainerConfig()
 
     
-    def initiate_model_trainer(self, train_arr, test_arr, preprocessor_path):
+    def initiate_model_trainer(self, train_arr, test_arr):
         try:
             logging.info("split trainig and testing input data.")
 

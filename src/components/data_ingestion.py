@@ -19,12 +19,11 @@ class DataIngestion:
         try:
             df = pd.read_csv(r'notebook/data/student.csv')
             os.makedirs(os.path.dirname(self.ingestion_config.train_data_path), exist_ok=True)
-
             df.to_csv(self.ingestion_config.raw_data_path, index=False, header=True)
+            logging.info("Raw data saved.")
 
-            logging.info("Train-test split initiated...")
+            
             train_data, test_data = train_test_split(df, test_size=0.2, random_state=42)
-
             train_data.to_csv(self.ingestion_config.train_data_path, index=False, header=True)
             test_data.to_csv(self.ingestion_config.test_data_path, index=False, header=True)
 
