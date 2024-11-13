@@ -4,6 +4,7 @@ from sklearn.model_selection import train_test_split
 from src.exception import CustomException
 from src.logger import logging
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer, ModelTrainerConfig
 
 class DataIngestionConfig:
     train_data_path: str = 'artifacts/train.csv'
@@ -39,6 +40,8 @@ if __name__ == '__main__':
     train_data, test_data = obj.initiate_data_ingestion()
 
     data_transformation = DataTransformation()
-    train_arr, test_arr, preprocessor_path = data_transformation.initiate_data_transformation(train_data, test_data)
+    train_arr, test_arr, _ = data_transformation.initiate_data_transformation(train_data, test_data)
 
-    logging.info(f"Transformation completed and saved to {preprocessor_path}.")
+
+    modelll_trainer = ModelTrainer()
+    print(modelll_trainer.initiate_model_trainer(train_arr, test_arr))
