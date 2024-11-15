@@ -1,11 +1,9 @@
-import os
-import sys
+
 from dataclasses import dataclass
 
 from sklearn.metrics import r2_score
 from sklearn.linear_model import LinearRegression
 from sklearn.tree import DecisionTreeRegressor
-from sklearn.neighbors import KNeighborsRegressor 
 from sklearn.ensemble import AdaBoostRegressor, GradientBoostingRegressor, RandomForestRegressor
 from catboost import CatBoostRegressor
 from xgboost import XGBRegressor
